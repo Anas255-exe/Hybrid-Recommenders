@@ -29,10 +29,10 @@ def recommend_posts(user_id, category_id=None, mood=None):
         return {"error": "Error fetching user posts", "details": [viewed_posts, liked_posts, inspired_posts, rated_posts, all_posts]}
 
     # Collect post IDs from user interactions
-    viewed_post_ids = {post['post_id'] for post in viewed_posts.get('posts', []) if 'post_id' in post}
-    liked_post_ids = {post['post_id'] for post in liked_posts.get('posts', []) if 'post_id' in post}
-    inspired_post_ids = {post['post_id'] for post in inspired_posts.get('posts', []) if 'post_id' in post}
-    rated_post_ids = {post['post_id'] for post in rated_posts.get('posts', []) if 'post_id' in post}
+    viewed_post_ids = {post['id'] for post in viewed_posts.get('posts', []) if 'id' in post}
+    liked_post_ids = {post['id'] for post in liked_posts.get('posts', []) if 'id' in post}
+    inspired_post_ids = {post['id'] for post in inspired_posts.get('posts', []) if 'id' in post}
+    rated_post_ids = {post['id'] for post in rated_posts.get('posts', []) if 'id' in post}
 
     # Combine all user interactions
     user_interacted_post_ids = viewed_post_ids.union(liked_post_ids, inspired_post_ids, rated_post_ids)
