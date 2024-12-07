@@ -124,21 +124,69 @@ cd Video_recommendation-
 
  <img src="https://github.com/user-attachments/assets/4541bcd0-9acb-4b49-85df-679b75a7f742" alt="Description of Image" width="500" height="300">
 
- ### Key Decisions Made During Development
 
-During the development of this project, several key decisions and challenges were encountered that shaped the implementation process. Below are the major decisions and problems faced:
+---
 
-1. **Model Selection**: 
-   Initially, I explored several models to implement the video recommendation system. After researching, I decided to experiment with K-Nearest Neighbors (KNN) for the recommendation algorithm. However, after a series of trials, I faced difficulties in implementing it effectively due to issues in data handling and model integration.
+### Key Decisions Made During Development
 
-2. **Data Inconsistencies**: 
-   One of the significant challenges encountered during the implementation was inconsistencies in the dataset. Specifically, there were discrepancies in how the `user_id` variable was represented across different parts of the data. In some places, the variable was referred to as `id`, while in others, it was labeled as `user_id`. This caused confusion when trying to merge or process the data, leading to errors and delays in the implementation. To resolve this, I had to manually standardize the variable names across the dataset to ensure consistency and smooth data processing.
+During the development of this recommendation system, the initial approach was to implement the K-Nearest Neighbors (KNN) algorithm to provide video recommendations. This approach was chosen because of the simplicity and effectiveness of KNN in identifying patterns from user preferences based on ratings or features.
 
-3. **Modeling Approach**: 
-   Due to the difficulties with KNN, I eventually pivoted to exploring alternative approaches for building the recommendation system. This required significant rethinking of the data flow and model selection to ensure better accuracy and scalability. This decision was pivotal to moving the project forward and achieving a more robust recommendation system.
+**KNN Approach**
 
-4. **Data Preprocessing**:
-   During the preprocessing stage, I had to ensure that all features and data points were aligned correctly. This involved cleaning up missing values, handling inconsistent variable names, and formatting data for compatibility with the chosen recommendation algorithm. The inconsistencies, especially in variable names, were a roadblock at this stage and took considerable time to resolve.
+KNN operates by calculating the similarity (or distance) between users (or items), identifying the nearest neighbors, and using their preferences or ratings to predict ratings for unseen items. However, during the implementation, a few challenges arose:
+
+1. **Model Selection**: Initially, I tried using KNN as a recommendation model. However, I encountered difficulties in adjusting the model and processing the data effectively. This led to exploring alternative approaches like content-based or collaborative filtering methods.
+  
+2. **Data Inconsistencies**: One major issue encountered was the inconsistency in variable names used across different datasets. Specifically, the variable `user_id` was sometimes referred to as `id`, which caused problems during data merging and distance computation for KNN. Resolving this inconsistency was critical to the successful implementation of the model.
+
+3. **Similarity Calculations**: KNN requires the computation of similarities between users or items. Initially, I used Euclidean Distance to measure the similarity between users. Later, I considered switching to Cosine Similarity for better performance, especially in sparse datasets, as it accounts for the direction of ratings rather than the magnitude.
+
+**Equations Attempted in KNN**
+
+The following key equations were part of the KNN implementation and were used to calculate distances and predict ratings:
+
+1. **Euclidean Distance**
+
+Euclidean Distance is a standard method used to calculate the similarity between two data points (users or items). The formula is:
+
+d(x, y) = √(∑(xi - yi)²)
+
+Where:
+- x and y are data points (user/item feature vectors).
+- n is the number of features/items.
+- xi and yi are the values of the i-th feature.
+
+2. **KNN Prediction Formula**
+
+The prediction for a user u on an item i is calculated as:
+
+r̂(u,i) = (∑(v ∈ N_k(u)) sim(u,v) * r(v,i)) / (∑(v ∈ N_k(u)) sim(u,v))
+
+Where:
+- r̂(u,i) is the predicted rating for user u on item i.
+- N_k(u) is the set of k nearest neighbors of user u.
+- sim(u,v) is the similarity between user u and user v.
+- r(v,i) is the actual rating given by user v for item i.
+
+3. **Cosine Similarity**
+
+An alternative to Euclidean distance is Cosine Similarity, which calculates the cosine of the angle between two vectors. The formula is:
+
+sim(u,v) = (∑(r(u,i) * r(v,i))) / (√(∑(r(u,i)²)) * √(∑(r(v,i)²)))
+
+Where:
+- r(u,i) and r(v,i) are the ratings given by users u and v for item i.
+- n is the number of items.
+
+4. **Weighted Average Prediction**
+
+For better accuracy, a weighted average of neighbors' ratings can be used instead of a simple average:
+
+r̂(u,i) = (∑(v ∈ N_k(u)) sim(u,v) * r(v,i)) / (∑(v ∈ N_k(u)) |sim(u,v)|)
+
+Where:
+- The numerator is the weighted sum of ratings from the nearest neighbors.
+- The denominator normalizes the weights.
 
 
 **Thanks for taking my application into consideration**
