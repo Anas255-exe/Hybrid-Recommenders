@@ -124,5 +124,22 @@ cd Video_recommendation-
 
  <img src="https://github.com/user-attachments/assets/4541bcd0-9acb-4b49-85df-679b75a7f742" alt="Description of Image" width="500" height="300">
 
+ ### Key Decisions Made During Development
+
+During the development of this project, several key decisions and challenges were encountered that shaped the implementation process. Below are the major decisions and problems faced:
+
+1. **Model Selection**: 
+   Initially, I explored several models to implement the video recommendation system. After researching, I decided to experiment with K-Nearest Neighbors (KNN) for the recommendation algorithm. However, after a series of trials, I faced difficulties in implementing it effectively due to issues in data handling and model integration.
+
+2. **Data Inconsistencies**: 
+   One of the significant challenges encountered during the implementation was inconsistencies in the dataset. Specifically, there were discrepancies in how the `user_id` variable was represented across different parts of the data. In some places, the variable was referred to as `id`, while in others, it was labeled as `user_id`. This caused confusion when trying to merge or process the data, leading to errors and delays in the implementation. To resolve this, I had to manually standardize the variable names across the dataset to ensure consistency and smooth data processing.
+
+3. **Modeling Approach**: 
+   Due to the difficulties with KNN, I eventually pivoted to exploring alternative approaches for building the recommendation system. This required significant rethinking of the data flow and model selection to ensure better accuracy and scalability. This decision was pivotal to moving the project forward and achieving a more robust recommendation system.
+
+4. **Data Preprocessing**:
+   During the preprocessing stage, I had to ensure that all features and data points were aligned correctly. This involved cleaning up missing values, handling inconsistent variable names, and formatting data for compatibility with the chosen recommendation algorithm. The inconsistencies, especially in variable names, were a roadblock at this stage and took considerable time to resolve.
+
+
 **Thanks for taking my application into consideration**
 Feel free to reach out with any questions or feedback!  
