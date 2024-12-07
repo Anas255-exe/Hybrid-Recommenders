@@ -48,16 +48,18 @@ def recommend_posts(user_id, category_id=None, mood=None):
 
     # Filter all posts based on user interactions, category, mood, and collaborative filtering
     recommended_posts = []
+    
     for post in all_posts.get('posts', []):
-        if post['id'] in user_interacted_post_ids:
-            continue  # Skip posts the user has already interacted with
+        #for developer only //debug this
+        # if post['id'] in user_interacted_post_ids:
+        #     continue  # Skip posts the user has already interacted with
 
-        # Check content-based filters (category and mood)
+        # # Check content-based filters (category and mood)
         if (category_id is None or post.get('category_id') == category_id) and \
            (mood is None or post.get('mood') == mood):
             recommended_posts.append(post)
 
-        # If content-based filtering isn't enough, consider collaborative filtering
+        # # If content-based filtering isn't enough, consider collaborative filtering
         if post['id'] in similar_users_posts:
             recommended_posts.append(post)
 
