@@ -11,8 +11,8 @@ FLIC_TOKEN = "flic_6e2d8d25dc29a4ddd382c2383a903cf4a688d1a117f6eb43b35a1e7fadbb8
 def fetch_user_posts(endpoint):
     headers = {"Flic-Token": FLIC_TOKEN}
     try:
-        response = requests.get(endpoint, headers=headers, timeout=10)  # Set a timeout of 10 seconds
-        response.raise_for_status()  # Raise an error for bad responses
+        response = requests.get(endpoint, headers=headers, timeout=10)  
+        response.raise_for_status()  # error  bad responses
     except requests.exceptions.RequestException as e:
         return {"error": str(e), "status_code": None}
     return response.json()
@@ -41,7 +41,7 @@ def recommend_posts(user_id, category_id=None, mood=None):
     similar_users_posts = set()
 
     # Limit the number of users to check for collaborative filtering
-    for user in users_response.get('users', [])[:10]:  # Limit to first 10 users for example
+    for user in users_response.get('users', [])[:10]:  
         if user['id'] != user_id:
             liked_posts_of_user = fetch_user_posts(f"{API_BASE_URL}/posts/like?user_id={user['id']}&page=1&page_size=1000")
             similar_users_posts.update(post['id'] for post in liked_posts_of_user.get('posts', []))
@@ -59,11 +59,11 @@ def recommend_posts(user_id, category_id=None, mood=None):
            (mood is None or post.get('mood') == mood):
             recommended_posts.append(post)
 
-        # # If content-based filtering isn't enough, consider collaborative filtering
+        
         if post['id'] in similar_users_posts:
             recommended_posts.append(post)
 
-    return recommended_posts[:10]  # Return top 10 recommended posts
+    return recommended_posts[:10]  #return TOP-N here N=10
 
 # Route to get recommended posts based on username, category_id, and mood
 @app.route('/feed', methods=['GET'])
