@@ -195,5 +195,4 @@ Inconsistencies in Variable Naming
 One of the main issues I encountered was the inconsistency in variable names, particularly with user_id. In some places, it was referred to as id, and in other places, it was referred to as user_id. This inconsistency caused errors during data processing and model training, as the variables were not properly mapped. I had to carefully refactor the code and standardize the naming convention across the entire project.
 
 
-**Thanks for taking my application into consideration**
 Feel free to reach out with any questions or feedback!  
